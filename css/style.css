@@ -1,0 +1,244 @@
+body
+{
+	background: linear-gradient(90deg, rgb(137, 197, 238) 0%, rgb(56, 144, 202) 35%, rgba(0,212,255,1) 100%);
+	font-size: 20px;
+	font-family: 'Lato', sans-serif;
+}
+.mainContainer
+{
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	min-height: 100%;
+}
+.category
+{
+	margin: auto;
+	margin-top: 100px;
+	width: 100%;
+	text-align: center;
+}
+#category
+{
+    height: 30px;
+    padding-left: 10px;
+}
+.password{
+	margin: auto;
+	margin-top: 20px;
+}
+#password
+{
+    height: 30px;
+    width: 250px;
+    padding-left: 10px;
+}
+.button 
+{
+	display: flex; 
+	justify-content: center;
+	margin: 20px;
+}
+/*.players, .wheelContainer, .passwordContainer, .instructionContainer
+{
+	border-color: #0000005e;
+	border-style: solid;
+	border-radius: 15px;
+	width: 45%;
+	margin: 10px;
+	float: left;
+	box-sizing: border-box;
+	height: 100%;
+}*/
+.wheelContainer
+{
+	text-align: center;
+}
+.instructions
+{
+	margin: 20px;
+}
+.player
+{
+	width: 49%;
+	display: inline-block;
+}
+.photo
+{
+	border-color: #0000005e;
+	border-radius: 100%;
+	border-style: solid;
+	min-height: 150px;
+	width: 150px;
+	margin: 10px auto;
+	text-align: center;
+	background-position: 50%;
+	background-size: 100%;
+}
+.caption
+{
+	margin: 10px auto;
+	text-align: center;
+}
+
+.points
+{
+	margin: 10px auto;
+	text-align: center;
+}
+.active
+{
+	color: green;
+	font-weight: bold;
+}
+.inactive
+{
+	color: #ff4040;
+}
+.letter, .disabledLetter
+{
+	border: solid;
+	border-color: #0000005e;
+	width: 30px;
+	height: 30px;
+	float: left;
+	margin: 5px;
+	border-radius: 10%;
+	text-align: center;
+	cursor: pointer;
+	transition: 0.3s;
+}
+.disabledLetter
+{
+	width: 50px;
+	height: 50px;
+}
+.letter:hover
+{
+	border-color: #0c330c;
+	background-color: #448f44;
+}
+.innerLetter, .innerPasswordLetter
+{
+	vertical-align: middle;
+	display: inline-block;
+}
+.innerPasswordLetter
+{
+	transform: translate(0, 25%);
+	font-size: 30px;
+	font-weight: bold;
+	animation: fadeIn ease 3s;
+}
+
+@keyframes fadeIn
+{
+	0%
+	{
+		opacity:0;
+	}
+	100%
+	{
+		opacity:1;
+	}
+}
+
+
+.emptyPlaces
+{
+	margin: 5px auto;
+	text-align: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.passwordSpace
+{
+	margin-left: 35px;
+}
+.emptyPlace
+{
+	display: inline;
+	text-align: center;	
+}
+.spinningButton
+{
+	text-align: center;
+}
+.wheel
+{
+	text-align: center;
+	margin: 30px;
+}
+button
+{
+	background-color:  rgb(25, 105, 25);
+	border: none;
+	border-radius: 5px;
+	color: white;
+	padding: 15px 32px 15px 32px;
+	cursor: pointer;
+	transition: 0.3s;
+	font-size: 20px;
+}
+button:hover:not(.inactiveButton){
+	background-color: #448f44;
+}
+.inactiveButton:hover{
+	background-color: #727272;
+}
+.inactiveButton {
+	background-color:  rgb(102, 102, 102);
+	border: none;
+	border-radius: 5px;
+	color: white;
+	padding: 15px 32px 15px 32px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+.comment
+{
+	text-align: center;
+	margin-top: 20px;
+	font-size: 35px;
+}
+.guessedLetter
+{
+	background-color: rgb(163, 231, 147);
+}
+/******* tooltip over vowels *******/
+.tooltip:before {
+	content: "Remember that calling a vowel costs You points!";
+	font-size: 16px;
+    position: absolute;
+    opacity: 0;
+    transition: all 0.15s ease;
+    padding: 4px;
+    color: #333;
+    border-radius: 10px;  
+	pointer-events: none; 
+	z-index: 1;
+}
+.tooltip:hover:before 
+{
+    opacity: 1;
+    background: rgba(221, 221, 194, 0.966);
+    margin-top: -1em;
+    margin-left: 30px;    
+}
+
+.grid:after {
+	content: '';
+	display: block;
+	clear: both;
+  }
+.grid-item 
+{
+	width: 45%;
+	float: left;
+
+	border-color: #0000005e;
+	border-style: solid;
+	border-radius: 15px;
+	margin: 10px;
+}

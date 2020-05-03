@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Krystian Swiderski">
+	<title>Wheel of Fortune</title>
+	
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="shortcut icon" href="">
+	<script src="../script/jquery-3.4.1.min.js"></script>
+	<script src="../script/masonry.pkgd.min.js"></script>
+	<script src="../script/script.js"></script>
+</head>
+
+<body>	
+	<main>
+		<div class="grid">
+			<div class="grid-item">
+				<div class="player" id="player1">
+					<div class="photo" style='background-image: url("../img/player1.png")'></div>
+					<div class="caption active" id="playerName1">Player 1</div>
+					<div class="points active" id="points1">Points: <span class="pointsValue">0</span></div>
+
+				</div>
+				<div class="player" id="player2">
+					<div class="photo" style='background-image: url("../img/player2.png")'></div>
+					<div class="caption inactive" id="playerName2">Player 2</div>
+					<div class="points inactive" id="points2">Points: <span>0</span></div>
+				</div>
+
+				<div id="passwordGuessed" style="text-align: center; visibility: hidden; margin-bottom: 20px;">
+					<input id="password"></input>
+					<button id="checkPassword" onclick="checkPasswordCorrectness();">Check the password</button>
+				</div>
+			</div>
+
+			<div class="wheelContainer grid-item">
+				<canvas id="wheel" style="margin: 10px 0px 10px 10px;">
+					Your browser does not support the HTML5 canvas tag.</canvas>
+				<canvas id="arrow" width="30" style="margin: 10px 0px 10px -10px;">
+					Your browser does not support the HTML5 canvas tag.</canvas>
+				<div class="wheel">		
+				</div>
+			</div>
+
+			<div class="passwordContainer grid-item">
+				<div class="comment">CATEGORY: </div>
+			</div>
+
+			<div class="grid-item">
+				<div class="instructions">
+					INSTRUCTION:<br>
+					<ol>
+						<li>Spin the wheel.</li>
+						<li>Guess the letter.</li>
+						<li>If it's correct - go to point 1.</li>
+						<li>Change the player.</li>
+					</ol>	
+				</div>		
+			</div>
+		</div>
+	</main>
+</body>
+</html>

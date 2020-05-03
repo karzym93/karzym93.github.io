@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Krystian Swiderski">
+	<title>Wheel of Fortune</title>
+	
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="">
+	<script src="script/jquery-3.4.1.min.js"></script>
+	<script src="script/start.js"></script>
+</head>
+
+<body>
+    <div class="mainContainer">
+        <div class="category">
+            <label for="category">Choose the category first: </label>
+
+            <select id="category">
+            </select>
+        </div>
+        <div class="password">
+            <label for="password">Type the password players have to guess: </label>
+            <input id="password" onkeyup="checkLength();" maxlength="50"></input>
+        </div>
+        <div class="button" style="width:100%;">
+            <button onclick="validate();">...or try to guess random password!</button>
+        </div>
+    </div>
+</body>
