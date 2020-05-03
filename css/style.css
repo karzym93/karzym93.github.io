@@ -11,10 +11,10 @@ body
 	flex-direction: row;
 	min-height: 100%;
 }
-.category
+.category, .players
 {
 	margin: auto;
-	margin-top: 100px;
+	margin-top: 40px;
 	width: 100%;
 	text-align: center;
 }
@@ -27,7 +27,7 @@ body
 	margin: auto;
 	margin-top: 20px;
 }
-#password
+input
 {
     height: 30px;
     width: 250px;
@@ -68,8 +68,8 @@ body
 	border-color: #0000005e;
 	border-radius: 100%;
 	border-style: solid;
-	min-height: 150px;
-	width: 150px;
+	min-height: 100px;
+	width: 100px;
 	margin: 10px auto;
 	text-align: center;
 	background-position: 50%;
@@ -93,7 +93,7 @@ body
 }
 .inactive
 {
-	color: #ff4040;
+	color: #b70000;
 }
 .letter, .disabledLetter
 {
@@ -110,8 +110,8 @@ body
 }
 .disabledLetter
 {
-	width: 50px;
-	height: 50px;
+	width: 2em;
+	height: 2em;
 }
 .letter:hover
 {
@@ -125,7 +125,7 @@ body
 }
 .innerPasswordLetter
 {
-	transform: translate(0, 25%);
+	transform: translate(0, 13%);
 	font-size: 30px;
 	font-weight: bold;
 	animation: fadeIn ease 3s;
@@ -176,7 +176,7 @@ button
 	border: none;
 	border-radius: 5px;
 	color: white;
-	padding: 15px 32px 15px 32px;
+	padding: 10px 32px 10px 32px;
 	cursor: pointer;
 	transition: 0.3s;
 	font-size: 20px;
@@ -199,7 +199,7 @@ button:hover:not(.inactiveButton){
 .comment
 {
 	text-align: center;
-	margin-top: 20px;
+	margin-top: 10px;
 	font-size: 35px;
 }
 .guessedLetter
@@ -208,7 +208,7 @@ button:hover:not(.inactiveButton){
 }
 /******* tooltip over vowels *******/
 .tooltip:before {
-	content: "Remember that calling a vowel costs You points!";
+	content: "Remember that calling a vowel costs You 500 points!";
 	font-size: 16px;
     position: absolute;
     opacity: 0;
@@ -234,11 +234,11 @@ button:hover:not(.inactiveButton){
   }
 .grid-item 
 {
-	width: 45%;
+	width: 48%;
 	float: left;
 
 	border-color: #0000005e;
 	border-style: solid;
 	border-radius: 15px;
-	margin: 10px;
+	margin: 2px;
 }

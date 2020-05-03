@@ -1,4 +1,4 @@
-categories = ["Music","Film","Geography","Place"];
+categories = ["-- Select --","Music","Film","Geography","Place"];
 var jsonData;
 $password = null;
 $category = null;
@@ -6,7 +6,7 @@ $category = null;
 function setCategories () {
 	$category = $('#category');
 	categories.forEach(function(item, index) {
-		$category.append('<option value="' + index + '">' + item + '</option>');
+		$category.append('<option value="' + item + '">' + item + '</option>');
 	});
 }
 
@@ -27,13 +27,15 @@ function setCookie(name, value) {
 
 function redirectToGame() {
 	$password = $password || $('#password').val();
-	$category = $category || $('#category option:selected').text();
+	$category = ($('#password').val()?$('#category option:selected').text():$category);
+	$player1 = $('#player1').val();
+	$player2 = $('#player2').val();
 	setCookie('category', $category);
 	setCookie('password', $password);
-	window.localStorage.setItem('password', $password);
-	window.localStorage.setItem('category', $category);
+	setCookie('player1', $player1);
+	setCookie('player2', $player2);
+	console.log(document.cookie);
 	location.href='wheel/wheel.html';
-	console.log(window.localStorage);
 }
 //////////validation on button
 function validate() {

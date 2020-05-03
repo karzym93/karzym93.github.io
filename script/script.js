@@ -10,17 +10,15 @@ var wrongAudio = new Audio('../sound/wrong.mp3');
 var spinningTime = 7000; 
 var lettersTab = ["A", "Ą", "B", "C", "Ć", "D", "E", "Ę", "F", "G", "H", "I", "J", "K", "L",
 "Ł", "M", "N", "Ń", "O", "P", "Q", "R", "S", "Ś", "T", "U", "V", "W", "X", "Y", "Z", "Ź", "Ż"]
-
+var vowelCost = 500;
 
 //////get players' names
 function getName() {
-	for (i = 1; i < 3; i++) {
-		var name = prompt("Please enter the name of player " + i);
-		if (name != null) {
-			$('#playerName' + i).html(name);
-		}
+	for (i = 1; i < 3; i++) {		
+		$('#playerName' + i).html(getCookie('player' + i ) || ('Player '+i) + ": <span>0</span>");
 	}
 }
+
 //download password set on previous page
 function getCookie(cookieName) {
 	var name = cookieName + "=";
@@ -42,22 +40,22 @@ function changePerson() {
 	$('#playerName' + personPlaying)
 			.addClass('inactive')
 			.removeClass('active');
-	$('#points' + personPlaying)
+	/*$('#points' + personPlaying)
 			.removeClass('active')
-			.addClass('inactive');
+			.addClass('inactive');*/
 	personPlaying = personPlaying % 2 + 1;
 	$('#playerName' + personPlaying)
 			.removeClass('inactive')
 			.addClass('active');
-	$('#points' + personPlaying)
+	/*$('#points' + personPlaying)
 			.addClass('active')
-			.removeClass('inactive');
+			.removeClass('inactive');*/
 	var wheelSpinned = false;
 }
 
 /////create array with prizes and shuffle it
 function shuffle() {
-	var array = Array(wheelParts).fill(0).map((e, i) => i * 100);
+	var array = Array(wheelParts).fill(0).map((e, i) => i * 50);
 	var i = array.length,
 		j = 0,
 		temp;
@@ -92,7 +90,7 @@ function generatePasswordDiv(password) {
 	$passwordContainer.append('<div class="emptyPlaces">');
 	for (i=0; i<words.length; i++) {
 		 //check if additional new line needed
-		if ($('.emptyPlaces').last().children().length + words[i].length > 8)
+		if ($('.emptyPlaces').last().children().length + words[i].length > 12)
 			$passwordContainer.append('<div class="emptyPlaces">');
 		else if ($('.emptyPlaces').last().children().length)
 			$passwordContainer.children().last().append('&nbsp;&nbsp;&nbsp;&nbsp;');
@@ -130,13 +128,15 @@ function blink(i) {
 	}		
 	setTimeout(stopBlinking, 2500);	
 }
+/////check if chossen letter is a vowel
 function checkIfVowel(letterNumber) {
 	return /^[AĄEĘIOÓUY]$/.test(lettersTab[letterNumber]);
 }
+//////check if current person can choose a vowel
 function checkVowelForPlayer(personPlaying) {
-	$points = $('#points' + personPlaying).find('span').text();
-	if ($points >= 800) {
-		$('#points' + personPlaying).find('span').text($points - 800);
+	$points = $('#playerName' + personPlaying).find('span').text();
+	if ($points >= 500) {
+		$('#playerName' + personPlaying).find('span').text($points - 500);
 		return true;
 	}
 	else {
@@ -172,8 +172,8 @@ async function checkLetter(letterNumber) {
 			$passwordGuessed = $('#passwordGuessed');					
 			$checkPassword = $('#checkPassword');
 			if (prize != 'Bankrupt' && !isVowel) {
-				var sum = parseInt($('#points' + personPlaying).children().text()) + prize;
-				$('#points' + personPlaying).find('span').text(sum);
+				var sum = parseInt($('#playerName' + personPlaying).children().text()) + prize;
+				$('#playerName' + personPlaying).find('span').text(sum);
 			}
 			correctGuess = true;
 		}
@@ -195,7 +195,7 @@ async function checkLetter(letterNumber) {
 	wheelSpinned = false;
 	correctGuess = false;
 }
-/********************** ************
+/*************************************
  * Check if typed password is correct
  * ***********************************/
 function checkPasswordCorrectness() {
@@ -227,12 +227,12 @@ function checkPasswordCorrectness() {
 var prizes = shuffle();
 function drawWheel() {
 	var c = document.getElementById("wheel");
-	var x1 = 500;
-	var y1 = 500;
-	c.width = x1;	
-	c.height = y1;
-	wheelCenterX = x1;
-	wheelCenterY = y1;
+	var wheelWidth = 500; 
+	var wheelHeight = 500;
+	c.width = /*$('.wheelContainer').width() - 50;*/wheelWidth;	
+	c.height = /*$('.wheelContainer').width() - 50;*/wheelHeight;
+	wheelCenterX = wheelWidth;
+	wheelCenterY = wheelHeight;
 	var ctx = c.getContext("2d");
 	var length = 450;
 	ctx.beginPath();
@@ -279,10 +279,10 @@ function drawWheel() {
 	c.height = wheelCenterY;
 	var ctx = c.getContext("2d");
 	ctx.beginPath();
-	ctx.moveTo(30, y1/2-15);
-	ctx.lineTo(0, y1/2);
-	ctx.lineTo(30, y1/2+15);
-	ctx.lineTo(30, y1/2-15);
+	ctx.moveTo(30, wheelHeight/2-15);
+	ctx.lineTo(0, wheelHeight/2);
+	ctx.lineTo(30, wheelHeight/2+15);
+	ctx.lineTo(30, wheelHeight/2-15);
 	ctx.closePath();
 	ctx.stroke();
 	ctx.fillStyle="red";
@@ -384,7 +384,7 @@ function spin($) {
 			////change player in bankrupt case
 			if (prize=='Bankrupt') {
 				setTimeout(function() {
-					$('#points' + personPlaying).find('span').text(0);
+					$('#playerName' + personPlaying).find('span').text(0);
 					var fail = new Audio('../sound/fail.mp3')
 					fail.play();
 					changePerson();
