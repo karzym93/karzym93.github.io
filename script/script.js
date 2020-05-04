@@ -14,8 +14,9 @@ var vowelCost = 500;
 
 //////get players' names
 function getName() {
-	for (i = 1; i < 3; i++) {		
-		$('#playerName' + i).html(getCookie('player' + i ) || ('Player '+i) + ": <span>0</span>");
+	for (i = 1; i < 3; i++) {	
+		var ithPlayerName = getCookie('player' + i ) || ('Player '+i);	
+		$('#playerName' + i).html(ithPlayerName + ": <span>0</span>");
 	}
 }
 
@@ -135,8 +136,8 @@ function checkIfVowel(letterNumber) {
 //////check if current person can choose a vowel
 function checkVowelForPlayer(personPlaying) {
 	$points = $('#playerName' + personPlaying).find('span').text();
-	if ($points >= 500) {
-		$('#playerName' + personPlaying).find('span').text($points - 500);
+	if ($points >= vowelCost) {
+		$('#playerName' + personPlaying).find('span').text($points - vowelCost);
 		return true;
 	}
 	else {
@@ -160,6 +161,7 @@ async function checkLetter(letterNumber) {
 		};
 
 		for (i = 0; i < passwordWithoutSpaces.length; i++) {
+			/// check if guess not correct
 			if (passwordWithoutSpaces.charAt(i).toUpperCase() != $('#letter' + letterNumber).children().text())
 				continue;			
 			$('.disabledLetter:eq(' + i + ')')
@@ -182,8 +184,8 @@ async function checkLetter(letterNumber) {
 			setTimeout(function(){checkPasswordCorrectness()},2500);
 			$passwordGuessed.css('visibility', 'hidden');
 		}
-		else
-			$passwordGuessed.css('visibility', 'unset');
+		//else
+		//	$passwordGuessed.css('visibility', 'unset');
 
 		if (!correctGuess) {
 			$('#letter' + letterNumber).css('background-color', 'rgb(220, 44, 44)');
@@ -208,7 +210,7 @@ function checkPasswordCorrectness() {
 		});
 
 		setTimeout(function() {
-			if (confirm("Congratulations " + $('.player').find('.active').html() + "! Wanna play again?") == true) {
+			if (confirm("Congratulations " + $('.player').find('.active').html().split(':')[0] + "! Wanna play again?") == true) {
 				location.href = '../start.html';
 			};
 		}, 2000);
@@ -247,6 +249,7 @@ function drawWheel() {
 	ctx.font = "25px Arial";
 	ctx.textAlign = "center";
 	ctx.translate(wheelCenterX/2, wheelCenterY/2);
+
 	///draw and fill parts
 	for (i=0; i<wheelParts; i++) {
 		//randomize fill color
@@ -267,10 +270,45 @@ function drawWheel() {
 		ctx.fillStyle = "rgb(0,0,0)";
 		ctx.strokeText(prizes[i],length/2 - 60,0);
 		ctx.fillText(prizes[i],length/2 - 60,0);
+		ctx.closePath();
 		ctx.stroke();
 		ctx.restore();
+		
 	}
-	console.log(prizes);
+	
+	///draw a circle inside of wheel
+	ctx.beginPath();
+	ctx.arc(0,0,100,0,Math.PI*2);
+	ctx.fillStyle='#eae427';
+	ctx.fill();
+	
+	ctx.globalCompositeOperation='source-atop';
+	
+	ctx.shadowOffsetX = wheelHeight;
+	ctx.shadowOffsetY = 0;
+	ctx.shadowBlur = 5;
+	ctx.shadowColor = 'rgba(30,30,30,1)';	
+	ctx.beginPath();
+	ctx.arc(0-wheelWidth,0,100,0,Math.PI*2);
+	ctx.stroke();
+	ctx.stroke();
+	ctx.stroke();
+	
+	ctx.globalCompositeOperation='source-over';
+	////write text in it
+	ctx.save();
+	ctx.closePath();
+	ctx.beginPath();
+	ctx.fill();
+	ctx.textBaseline="middle";
+	ctx.fillStyle = "#d64343";
+	ctx.font = "bold 40px fantasy";
+	ctx.fillText("Wheel",0,-50);
+	ctx.fillText("of",0,0);
+	ctx.fillText("Fortune",0,50);
+	ctx.closePath();
+	ctx.stroke();
+  	ctx.restore();
 
 	/////////////////////
 	/////draw arrow/////
@@ -382,15 +420,19 @@ function spin($) {
 				clearInterval(playSoundRepeated);
 			}, spinningTime);
 			////change player in bankrupt case
-			if (prize=='Bankrupt') {
-				setTimeout(function() {
+			//if (prize=='Bankrupt') {
+			setTimeout(function() {
+				if (prize=='Bankrupt') {
 					$('#playerName' + personPlaying).find('span').text(0);
 					var fail = new Audio('../sound/fail.mp3')
 					fail.play();
 					changePerson();
-					wheelSpinned = false;}
-					, spinningTime+10);
-			}
+					wheelSpinned = false;
+				}
+				else
+					$('#passwordGuessed').css('visibility', 'visible');
+			}, spinningTime+10);
+			//}
 		})();
 		$wheel.unbind('mousemove');
 		wheelSpinned = true;
