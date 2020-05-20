@@ -1,5 +1,6 @@
 var password = getCookie('password');
 var category = getCookie('category');
+var numberOfPlayers = getCookie('numberOfPlayers');
 var passwordWithoutSpaces = password.replace(/\s/g, '');
 var personPlaying = 1;
 var wheelSpinned = false;
@@ -12,9 +13,19 @@ var lettersTab = ["A", "Ą", "B", "C", "Ć", "D", "E", "Ę", "F", "G", "H", "I",
 "Ł", "M", "N", "Ń", "O", "P", "Q", "R", "S", "Ś", "T", "U", "V", "W", "X", "Y", "Z", "Ź", "Ż"]
 var vowelCost = 500;
 
+function generatePlayers() {
+	$players = $('#players');
+	for (i = numberOfPlayers; i > 0; i--) {
+		$players.prepend('<div class="player" id="player' + i + '" style="width: ' + 100 / numberOfPlayers + '%;"><div class="photo" style=\'background-image: url("../img/player' + i + '.png")\'></div><div class="caption inactive" id="playerName' + i + '">Player ' + i + ': <span>0</span></div></div>');
+	}
+	$('#playerName1')
+			.addClass('active')
+			.removeClass('inactive');
+}
+
 //////get players' names
 function getName() {
-	for (i = 1; i < 3; i++) {	
+	for (i = 1; i <= numberOfPlayers; i++) {	
 		var ithPlayerName = getCookie('player' + i ) || ('Player '+i);	
 		$('#playerName' + i).html(ithPlayerName + ": <span>0</span>");
 	}
@@ -44,7 +55,7 @@ function changePerson() {
 	/*$('#points' + personPlaying)
 			.removeClass('active')
 			.addClass('inactive');*/
-	personPlaying = personPlaying % 2 + 1;
+	personPlaying = personPlaying % numberOfPlayers + 1;
 	$('#playerName' + personPlaying)
 			.removeClass('inactive')
 			.addClass('active');
@@ -457,4 +468,4 @@ function runMasonry() {
 	});
 }
 
-$(document).ready(function() {getName();generatePasswordDiv(password); generateAlphabet();drawWheel();spin($);allowEnter();runMasonry();});
+$(document).ready(function() {generatePlayers();getName();generatePasswordDiv(password); generateAlphabet();drawWheel();spin($);allowEnter();runMasonry();});

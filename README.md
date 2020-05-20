@@ -37,3 +37,11 @@ Open file start.html.
 
 Or go to [playable demo here](https://karzym93.github.io/start.html).
 
+To do
+-----
+- more categories
+- mobile support
+- possibility to set letters from keyboard
+...
+- playing online
+

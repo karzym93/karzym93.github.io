@@ -1,12 +1,21 @@
 categories = ["-- Select --","Music","Film","Geography","Place"];
+players = ["two", "three", "four"];
 var jsonData;
 $password = null;
 $category = null;
+var $numberOfPlayers;
 
 function setCategories () {
 	$category = $('#category');
 	categories.forEach(function(item, index) {
 		$category.append('<option value="' + item + '">' + item + '</option>');
+	});
+}
+
+function setPlayers () {
+	$howManyPlayers = $('#howManyPlayers');
+	players.forEach(function(item, index) {
+		$howManyPlayers.append('<option value="' + item + '">' + item + '</option>');
 	});
 }
 
@@ -24,6 +33,13 @@ function setCookie(name, value) {
 	document.cookie = name + "=" + value + ";" + expires + ";path=/";
   }
 
+function showPlayers() {
+	$('.playersNames').empty();
+	$numberOfPlayers = $("#howManyPlayers").find("option:selected").index() + 2;
+	for (i=1; i<=$numberOfPlayers; i++) {
+		$('.playersNames').append('<label for="player' + i + '">Player ' + i + ' name:</label><input id="player' + i + '">');
+	}
+}
 
 function redirectToGame() {
 	$password = $password || $('#password').val();
@@ -34,7 +50,9 @@ function redirectToGame() {
 	setCookie('password', $password);
 	setCookie('player1', $player1);
 	setCookie('player2', $player2);
-	console.log(document.cookie);
+	if ($('#player3').length) setCookie('player3', $('#player3').val());
+	if ($('#player4').length) setCookie('player4', $('#player4').val());
+	setCookie('numberOfPlayers', $numberOfPlayers);
 	location.href='wheel/wheel.html';
 }
 //////////validation on button
@@ -61,6 +79,6 @@ function validate() {
 }
 
 
-$(document).ready(function () {setCategories();});
+$(document).ready(function () {setCategories(); setPlayers();showPlayers();});
 
 

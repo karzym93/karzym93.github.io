@@ -14,34 +14,28 @@
 <body>
     <div class="mainContainer">
         <div class="players">
-            <label for="player1">Player 1 name:</label>
-            <input id="player1"></input>
-            <label for="player2">Player 2 name:</label>
-            <input id="player2"></input>
+            <div class="numberOfPlayers">
+                <label for="howManyPlayers" style="padding-bottom: 30px; float: none; display: inline-block;">How many players will be playing?</label>
+                <select id="howManyPlayers" onchange="showPlayers();"></select>
+              
+            </div>
+            <div class="playersNames">
+                <!--<label for="player1">Player 1 name:</label>
+                <input id="player1"></input>
+                <label for="player2">Player 2 name:</label>
+                <input id="player2"></input>-->
+            </div>
         </div>
         <div class="category">
-            <label for="category">Choose the category:</label>
+            <label for="category" style="float: none; display: inline-block;">Choose the category:</label>
             <select id="category"></select>
         </div>
         <div class="password">
-            <label for="password">Type the password players have to guess: </label>
-            <input id="password" onkeyup="checkLength();" maxlength="50"></input>
+            <label for="password" style="float: none; display: inline-block;">Type the password players have to guess: </label>
+            <input id="password" style="float: none;" onkeyup="checkLength();" maxlength="50"></input>
         </div>
         <div class="button" style="width:100%;">
             <button onclick="validate();">...or try to guess random password!</button>
         </div>
-
-        <!--<div class="box">
-            <a class="button" href="#popup1">Let me Pop up</a>
-        </div>
-        <div id="popup1" class="overlay">
-            <div class="popup">
-                <h2>Here i am</h2>
-                <a class="close" href="#">&times;</a>
-                <div class="content">
-                    Thank to pop me out of that button, but now i'm done so you can close this window.
-                </div>
-            </div>
-        </div>-->
     </div>
 </body>
