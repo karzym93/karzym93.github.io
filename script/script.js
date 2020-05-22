@@ -52,16 +52,10 @@ function changePerson() {
 	$('#playerName' + personPlaying)
 			.addClass('inactive')
 			.removeClass('active');
-	/*$('#points' + personPlaying)
-			.removeClass('active')
-			.addClass('inactive');*/
-	personPlaying = personPlaying % numberOfPlayers + 1;
+	personPlaying = (personPlaying % numberOfPlayers) + 1;
 	$('#playerName' + personPlaying)
 			.removeClass('inactive')
 			.addClass('active');
-	/*$('#points' + personPlaying)
-			.addClass('active')
-			.removeClass('inactive');*/
 	var wheelSpinned = false;
 }
 
@@ -159,7 +153,6 @@ function checkVowelForPlayer(personPlaying) {
 /***************************************
  * check if letter appears in password *
  * *********************************** */
-$passwordGuessed = $('#passwordGuessed');
 var wheelSpinning = false;
 var isVowel;
 async function checkLetter(letterNumber) {
@@ -182,7 +175,7 @@ async function checkLetter(letterNumber) {
 			$('#letter' + letterNumber).css('background-color', 'rgb(163, 231, 147)');
 			await new Promise(r => setTimeout(r, 500));
 			
-			$passwordGuessed = $('#passwordGuessed');					
+			//$passwordGuessed = $('#passwordGuessed');					
 			$checkPassword = $('#checkPassword');
 			if (prize != 'Bankrupt' && !isVowel) {
 				var sum = parseInt($('#playerName' + personPlaying).children().text()) + prize;
@@ -193,14 +186,14 @@ async function checkLetter(letterNumber) {
 		if ($('.innerPasswordLetter').length == passwordWithoutSpaces.length) {
 			$('#password').val(password);
 			setTimeout(function(){checkPasswordCorrectness()},2500);
-			$passwordGuessed.css('visibility', 'hidden');
+			$('#passwordGuessed').css('visibility', 'hidden');
 		}
 		//else
 		//	$passwordGuessed.css('visibility', 'unset');
 
 		if (!correctGuess) {
 			$('#letter' + letterNumber).css('background-color', 'rgb(220, 44, 44)');
-			$passwordGuessed.css('visibility', 'hidden');
+			$('#passwordGuessed').css('visibility', 'hidden');
 			wrongAudio.play();
 			changePerson();
 		}
@@ -228,9 +221,11 @@ function checkPasswordCorrectness() {
 	}
 	else {
 		wrongAudio.play();
-		$passwordGuessed.css('visibility', 'hidden');
+		$('#passwordGuessed').css('visibility', 'hidden');
 		$('#password').val(null);
+		console.log("asdasd");	
 		changePerson();
+		wheelSpinned = false;
 	}
 }
 
@@ -388,7 +383,7 @@ function spin($) {
 	var angle = angle || 0;
 	var curAngle; 
 	$wheel.on('mousedown', function(event) {
-		$passwordGuessed.css('visibility', 'hidden');
+		$('#passwordGuessed').css('visibility', 'hidden');
 		// Calculate the mouse position in degrees
 		if (!wheelSpinned) {
 			const clickDegrees = getDegrees(event.pageX, event.pageY);
