@@ -1,4 +1,4 @@
-categories = ["-- Select --","Music","Film","Geography","Place"];
+categories = ["Music","Film","Geography","Person"];
 players = ["two", "three", "four"];
 var jsonData;
 $password = null;
@@ -67,10 +67,8 @@ function validate() {
 				jsonData = JSON.parse(data);
 			}
 		});
-		////randomize category and password from the library
-		var numberOfCategories = Object.keys(jsonData).length;
-		var categoryNumber = Math.floor(Math.random() * numberOfCategories);
-		$category = Object.keys(jsonData)[categoryNumber];
+		////randomize password from the library
+		$category = $('#category').val();
 		var numberOfPasswords = jsonData[$category].length;
 		var passwordIndex = Math.floor(Math.random() * numberOfPasswords);
 		$password = jsonData[$category][passwordIndex];
