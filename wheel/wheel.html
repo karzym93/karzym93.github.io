@@ -5,7 +5,8 @@
 	<meta name="author" content="Krystian Swiderski">
 	<title>Wheel of Fortune</title>
 	
-	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
 	<link rel="shortcut icon" href="">
 	<script src="../script/jquery-3.4.1.min.js"></script>
 	<script src="../script/masonry.pkgd.min.js"></script>
@@ -13,40 +14,37 @@
 </head>
 
 <body>	
-	<main>
-		<div class="grid">
-			<div id="players" class="grid-item">
-				<div id="passwordGuessed" style="text-align: center; visibility: hidden; margin: 20px;">
-					<input id="password"></input>
-					<button id="checkPassword" onclick="checkPasswordCorrectness();">Check the password</button>
-				</div>
-			</div>
-
-			<div class="wheelContainer grid-item">
-				<canvas id="wheel" style="margin: 10px 0px 10px 10px;">
-					Your browser does not support the HTML5 canvas tag.</canvas>
-				<canvas id="arrow" width="30" style="margin: 10px 0px 10px -10px;">
-					Your browser does not support the HTML5 canvas tag.</canvas>
-				<!--<div class="wheel">		
-				</div>-->
-			</div>
-
-			<div class="passwordContainer grid-item">
-				<div class="comment">CATEGORY: </div>
-			</div>
-
-			<div class="grid-item">
-				<div class="instructions">
-					INSTRUCTION:<br>
-					<ol>
-						<li>Spin the wheel.</li>
-						<li>Guess the letter.</li>
-						<li>If it's correct - go to point 1.</li>
-						<li>Change the player.</li>
-					</ol>	
-				</div>		
+	<div class="grid container">
+		<div id="players" class="row grid-item">
+			<div id="passwordGuessed" style="text-align: center; visibility: hidden; margin: 20px;">
+				<input id="password" class="form-control"></input>
+				<button id="checkPassword" onclick="checkPasswordCorrectness();">Check the password</button>
 			</div>
 		</div>
-	</main>
+		<div class="wheelContainer grid-item">
+			<canvas id="wheel" style="margin: 10px 0px 10px 10px;">
+				Your browser does not support the HTML5 canvas tag.</canvas>
+			<canvas id="arrow" width="30" style="margin: 10px 0px 10px -10px;">
+				Your browser does not support the HTML5 canvas tag.</canvas>
+			<!--<div class="wheel">		
+			</div>-->
+		</div>
+			<div class="passwordContainer grid-item">
+			<div class="comment">CATEGORY: </div>
+		</div>
+		<div class="grid-item">
+			<div class="instructions">
+				INSTRUCTION:<br>
+				<ol>
+					<li>Spin the wheel.</li>
+					<li>Guess the letter.</li>
+					<li>If it's correct - go to point 1.</li>
+					<li>Change the player.</li>
+				</ol>	
+			</div>		
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -81,7 +81,7 @@ function generateAlphabet() {
 				+ '" onclick="checkLetter(' + lettersTab.indexOf(e) + ')"><span class="innerLetter">' + e + '</span></div>');
 		///add tooltip for vowels
 		if (checkIfVowel(lettersTab.indexOf(e))) {
-			$('#letter' + lettersTab.indexOf(e)).addClass('tooltip');
+			$('#letter' + lettersTab.indexOf(e)).addClass('customTooltip');
 		}
 	});
 

@@ -13,7 +13,6 @@ body
 }
 .category, .players
 {
-	margin: auto;
 	margin-top: 40px;
 	text-align: center;
 }
@@ -229,7 +228,7 @@ button:hover:not(.inactiveButton){
 	background-color: rgb(163, 231, 147);
 }
 /******* tooltip over vowels *******/
-.tooltip:before {
+.customTooltip:before {
 	content: "Remember that calling a vowel costs You 500 points!";
 	font-size: 16px;
     position: absolute;
@@ -241,7 +240,7 @@ button:hover:not(.inactiveButton){
 	pointer-events: none; 
 	z-index: 1;
 }
-.tooltip:hover:before 
+.customTooltip:hover:before 
 {
     opacity: 1;
     background: rgba(221, 221, 194, 0.966);

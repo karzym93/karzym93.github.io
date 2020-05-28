@@ -37,7 +37,7 @@ function showPlayers() {
 	$('.playersNames').empty();
 	$numberOfPlayers = $("#howManyPlayers").find("option:selected").index() + 2;
 	for (i=1; i<=$numberOfPlayers; i++) {
-		$('.playersNames').append('<label for="player' + i + '">Player ' + i + ' name:</label><input id="player' + i + '">');
+		$('.playersNames').append('<label for="player' + i + '" class="col-12 col-md-6">Player ' + i + ' name:</label><input id="player' + i + '" class="col-12 col-md-6 form-control">');
 	}
 }
 
