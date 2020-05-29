@@ -145,12 +145,12 @@ label
 }
 .innerLetter, .innerPasswordLetter
 {
-	vertical-align: middle;
 	display: inline-block;
+	line-height: 100%;
+	vertical-align: text-top;
 }
 .innerPasswordLetter
 {
-	transform: translate(0, 13%);
 	font-size: 30px;
 	font-weight: bold;
 	animation: fadeIn ease 3s;
