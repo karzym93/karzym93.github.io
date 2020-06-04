@@ -3,6 +3,7 @@ body
 	background: linear-gradient(90deg, rgb(137, 197, 238) 0%, rgb(56, 144, 202) 35%, rgba(0,212,255,1) 100%);
 	font-size: 20px;
 	font-family: 'Lato', sans-serif;
+	overflow-x: hidden;
 }
 .mainContainer
 {
@@ -81,7 +82,9 @@ label
 }
 .instructions
 {
-	margin: 20px;
+	border-color: #0000005e;
+	border-style: solid;
+	border-radius: 15px;
 }
 .player
 {
@@ -326,7 +329,7 @@ h1 {
 	  width: 70%;
 	}
   }
-
+/*
 .grid:after {
 	content: '';
 	display: block;
@@ -341,4 +344,4 @@ h1 {
 	border-style: solid;
 	border-radius: 15px;
 	margin: 2px;
-}
+}*/

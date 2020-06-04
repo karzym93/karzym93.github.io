@@ -37,6 +37,12 @@ Open file start.html.
 
 Or go to [playable demo here](https://karzym93.github.io/start.html).
 
+Features
+--------
+- possibility to play for 2-4 players
+- library with few thousands of passwords
+- mobile support
+
 To do
 -----
 - more categories

@@ -16,7 +16,7 @@ var vowelCost = 500;
 function generatePlayers() {
 	$players = $('#players');
 	for (i = numberOfPlayers; i > 0; i--) {
-		$players.prepend('<div class="player" id="player' + i + '" style="width: ' + 100 / numberOfPlayers + '%;"><div class="photo" style=\'background-image: url("../img/player' + i + '.png")\'></div><div class="caption inactive" id="playerName' + i + '">Player ' + i + ': <span>0</span></div></div>');
+		$players.prepend('<div class="player col-6 col-md-3" id="player' + i + '"><div class="photo" style=\'background-image: url("../img/player' + i + '.png")\'></div><div class="caption inactive" id="playerName' + i + '">Player ' + i + ': <span>0</span></div></div>');
 	}
 	$('#playerName1')
 			.addClass('active')
@@ -96,7 +96,8 @@ function generatePasswordDiv(password) {
 	$passwordContainer.append('<div class="emptyPlaces">');
 	for (i=0; i<words.length; i++) {
 		 //check if additional new line needed
-		if ($('.emptyPlaces').last().children().length + words[i].length > 12)
+		if ($('.emptyPlaces').last().children().length + words[i].length > 12 && document.body.clientWidth > 768
+				|| $('.emptyPlaces').last().children().length + words[i].length > 8 && document.body.clientWidth <= 768)
 			$passwordContainer.append('<div class="emptyPlaces">');
 		else if ($('.emptyPlaces').last().children().length)
 			$passwordContainer.children().last().append('&nbsp;&nbsp;&nbsp;&nbsp;');
@@ -235,14 +236,14 @@ function checkPasswordCorrectness() {
 var prizes = shuffle();
 function drawWheel() {
 	var c = document.getElementById("wheel");
-	var wheelWidth = 500; 
-	var wheelHeight = 500;
+	var wheelWidth = $('.wheelContainer')[0].clientWidth * 0.8; //; 
+	var wheelHeight = $('.wheelContainer')[0].clientWidth * 0.8; //500;
 	c.width = /*$('.wheelContainer').width() - 50;*/wheelWidth;	
 	c.height = /*$('.wheelContainer').width() - 50;*/wheelHeight;
 	wheelCenterX = wheelWidth;
 	wheelCenterY = wheelHeight;
 	var ctx = c.getContext("2d");
-	var length = 450;
+	var length = wheelHeight * 0.9;//450;
 	ctx.beginPath();
 	ctx.arc(wheelCenterX/2, wheelCenterY/2, length/2, 0, 2 * Math.PI);
 	for (i = 0; i<wheelParts; i++) {
@@ -251,9 +252,10 @@ function drawWheel() {
 		ctx.lineTo(wheelCenterX/2, wheelCenterY/2);
 		ctx.stroke();
 	}
-
-	ctx.font = "25px Arial";
-	ctx.textAlign = "center";
+	//var font = Math.floor(wheelWidth / 20);
+	//console.log(font);
+	ctx.font = wheelWidth / 20 + /*"25*/"px Arial";
+	ctx.textAlign = "left";
 	ctx.translate(wheelCenterX/2, wheelCenterY/2);
 
 	///draw and fill parts
@@ -272,10 +274,11 @@ function drawWheel() {
 		ctx.save();
 		//add text value of the part
 		ctx.textBaseline="middle";
+		ctx.textAlign = "end";
 		ctx.rotate(Math.PI/wheelParts);
 		ctx.fillStyle = "rgb(0,0,0)";
-		ctx.strokeText(prizes[i],length/2 - 60,0);
-		ctx.fillText(prizes[i],length/2 - 60,0);
+		ctx.strokeText(prizes[i],length/2 - 10,0);
+		ctx.fillText(prizes[i],length/2 - 10,0);
 		ctx.closePath();
 		ctx.stroke();
 		ctx.restore();
@@ -284,9 +287,9 @@ function drawWheel() {
 	
 	///draw a circle inside of wheel
 	ctx.beginPath();
-	ctx.arc(0,0,100,0,Math.PI*2);
+	ctx.arc(0,0, wheelWidth / 5/*100*/,0,Math.PI*2);
 	ctx.fillStyle='#eae427';
-	ctx.fill();
+	ctx.fill();	
 	
 	ctx.globalCompositeOperation='source-atop';
 	
@@ -295,7 +298,7 @@ function drawWheel() {
 	ctx.shadowBlur = 5;
 	ctx.shadowColor = 'rgba(30,30,30,1)';	
 	ctx.beginPath();
-	ctx.arc(0-wheelWidth,0,100,0,Math.PI*2);
+	ctx.arc(0-wheelWidth,0,wheelWidth / 5/*100*/,0,Math.PI*2);
 	ctx.stroke();
 	ctx.stroke();
 	ctx.stroke();
@@ -307,11 +310,12 @@ function drawWheel() {
 	ctx.beginPath();
 	ctx.fill();
 	ctx.textBaseline="middle";
+	ctx.textAlign="center";
 	ctx.fillStyle = "#d64343";
-	ctx.font = "bold 40px fantasy";
-	ctx.fillText("Wheel",0,-50);
+	ctx.font = /*"bold" + */Math.floor(wheelWidth / 12) + /*40*/"px fantasy";
+	ctx.fillText("Wheel",0,-wheelWidth / 10/*-50*/);
 	ctx.fillText("of",0,0);
-	ctx.fillText("Fortune",0,50);
+	ctx.fillText("Fortune",0,wheelWidth / 10/*50*/);
 	ctx.closePath();
 	ctx.stroke();
   	ctx.restore();
@@ -455,12 +459,12 @@ function allowEnter(){
 }
 
 ////////set divs vertically
-function runMasonry() {
+/*function runMasonry() {
 	var $grid = $('.grid').masonry({
 		itemSelector: '.grid-item',
 		percentPosition: true,
 		columnWidth: '.grid-item'
 	});
 }
-
-$(document).ready(function() {generatePlayers();getName();generatePasswordDiv(password); generateAlphabet();drawWheel();spin($);allowEnter();runMasonry();});
+*/
+$(document).ready(function() {generatePlayers();getName();generatePasswordDiv(password); generateAlphabet();drawWheel();spin($);allowEnter();});
