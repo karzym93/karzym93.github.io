@@ -46,7 +46,6 @@ Features
 To do
 -----
 - more categories
-- muting
 - mobile support
 - possibility to set letters from keyboard
 ...

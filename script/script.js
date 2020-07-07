@@ -8,6 +8,7 @@ var wheelParts = 20;
 var prize = 0;
 var correctGuess = false;
 var wrongAudio = new Audio('../sound/wrong.mp3');
+var wheelAudio = new Audio('../sound/wheel3.mp3');
 var spinningTime = 7000; 
 var lettersTab = ["A", "Ą", "B", "C", "Ć", "D", "E", "Ę", "F", "G", "H", "I", "J", "K", "L",
 "Ł", "M", "N", "Ń", "O", "P", "Q", "R", "S", "Ś", "T", "U", "V", "W", "X", "Y", "Z", "Ź", "Ż"]
@@ -422,7 +423,7 @@ function spin($) {
 			var playSoundRepeated = setInterval(function(){playSound(2)}, 3);
 			function playSound(angleDiff) {
 				if (getCurrentAngle() % (360 / wheelParts) < angleDiff) {
-					var wheelAudio = new Audio('../sound/wheel3.mp3');
+					//var wheelAudio = new Audio('../sound/wheel3.mp3');
 					wheelAudio.play();
 				}
 			}
@@ -449,7 +450,7 @@ function spin($) {
 		setTimeout(function() {wheelSpinned = true; wheelSpinning = false;}, spinningTime);
 	});
 };
-
+///// allow enter on typing password
 function allowEnter(){
 	$passwordTyped = $('#password');
 	$passwordTyped.keydown(function(e) {
@@ -457,14 +458,21 @@ function allowEnter(){
 			$('#checkPassword').click();
 	});
 }
-
-////////set divs vertically
-/*function runMasonry() {
-	var $grid = $('.grid').masonry({
-		itemSelector: '.grid-item',
-		percentPosition: true,
-		columnWidth: '.grid-item'
-	});
+///// allow muting the wheel sound
+/*function putSoundIcon() {
+	$('.container-fluid').prepend('<div id="audioIcon" onclick="muteWheelSound();" style="position: absolute; right: 10px;"><img src="../img/audio.svg" height="20"></div>');
+}*/
+function muteWheelSound() {
+	var $img = $('#audioIcon').children('img').attr('src');
+	if ($img.indexOf('/audio') != -1) {
+		$('#audioIcon').children('img').attr('src', '../img/no_audio.svg');
+		wheelAudio.muted = true;
+	}
+	else {
+		$('#audioIcon').children('img').attr('src', '../img/audio.svg');
+		wheelAudio.muted = false;
+	}
 }
-*/
+
+
 $(document).ready(function() {generatePlayers();getName();generatePasswordDiv(password); generateAlphabet();drawWheel();spin($);allowEnter();});

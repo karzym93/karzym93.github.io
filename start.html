@@ -23,12 +23,16 @@
             <div class="playersNames col-12 col-md-6"></div>
         </div>
         <div class="category row">
-            <label for="category" class="col-12 col-md-6">Choose the category:</label>
-            <select id="category" class="col-6 offset-3 offset-md-0 custom-select"></select>
+            <div class="col-12">
+                <label for="category" class="col-12 col-md-6">Choose the category:</label>
+                <select id="category" class="custom-select col-12 col-md-6"></select>
+            </div>
         </div>
-        <div class="password row">
-            <label class="col-12 col-md-6" for="password">Type the password players have to guess: </label>
-            <input id="password" class="col-10 col-md-6 offset-1 offset-md-0 form-control" onkeyup="checkLength();" maxlength="50"></input>
+        <div class="row" style="margin: auto; width: 100%;">
+            <div class="password col-12">
+                <label class="col-md-6" for="password">Type the password players have to guess: </label>
+                <input id="password" class="col-md-6 form-control" onkeyup="checkLength();" maxlength="50"></input>
+            </div>
         </div>
         <div class="button" style="width:100%;">
             <button onclick="validate();">...or try to guess random password!</button>
