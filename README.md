@@ -42,12 +42,12 @@ Features
 - possibility to play for 2-4 players
 - library with few thousands of passwords
 - mobile support
+- letters from keyboard
 
 To do
 -----
 - more categories
-- mobile support
-- possibility to set letters from keyboard
-...
+- more mobile support
+- wheel from keyboard
 - playing online
 

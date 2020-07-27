@@ -78,14 +78,13 @@ function shuffle() {
 
 function generateAlphabet() {
 	lettersTab.forEach(e => {
-		$('.passwordContainer').append('<div class="letter" id="letter' + lettersTab.indexOf(e) 
-				+ '" onclick="checkLetter(' + lettersTab.indexOf(e) + ')"><span class="innerLetter">' + e + '</span></div>');
+		$('.passwordContainer').append('<div class="letter" id="letter' + /*lettersTab.indexOf(*/e//) 
+				+ '" onclick="checkLetter(' + "'" + /*lettersTab.indexOf(*/e/*)*/ + "'" + ')"><span class="innerLetter">' + e + '</span></div>');
 		///add tooltip for vowels
-		if (checkIfVowel(lettersTab.indexOf(e))) {
-			$('#letter' + lettersTab.indexOf(e)).addClass('customTooltip');
+		if (checkIfVowel(/*lettersTab.indexOf(*/e/*)*/)) {
+			$('#letter' + /*lettersTab.indexOf(*/e/*)*/).addClass('customTooltip');
 		}
 	});
-
 }
 
 ///generate place for password which will be guessed
@@ -138,7 +137,7 @@ function blink(i) {
 }
 /////check if chossen letter is a vowel
 function checkIfVowel(letterNumber) {
-	return /^[AĄEĘIOÓUY]$/.test(lettersTab[letterNumber]);
+	return /^[AĄEĘIOÓUY]$/.test(/*lettersTab[*/letterNumber/*]*/);
 }
 //////check if current person can choose a vowel
 function checkVowelForPlayer(personPlaying) {
@@ -165,7 +164,6 @@ async function checkLetter(letterNumber) {
 		if (isVowel && !checkVowelForPlayer(personPlaying)) {
 			return;
 		};
-
 		for (i = 0; i < passwordWithoutSpaces.length; i++) {
 			/// check if guess not correct
 			if (passwordWithoutSpaces.charAt(i).toUpperCase() != $('#letter' + letterNumber).children().text())
@@ -473,6 +471,10 @@ function muteWheelSound() {
 		wheelAudio.muted = false;
 	}
 }
+///// allow typing letters instead of clicking
+$(document).on('keypress', function (e) {
+	checkLetter(String.fromCharCode(e.which).toUpperCase());
+});
 
 
 $(document).ready(function() {generatePlayers();getName();generatePasswordDiv(password); generateAlphabet();drawWheel();spin($);allowEnter();});
