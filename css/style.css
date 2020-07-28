@@ -143,6 +143,14 @@ label
 	width: 2em;
 	height: 2em;
 }
+.wrongLetter
+{
+	background-color: rgb(220, 44, 44);
+}
+.correctLetter
+{
+	background-color: rgb(163, 231, 147);
+}
 .letter:hover
 {
 	border-color: #0c330c;

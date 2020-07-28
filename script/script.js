@@ -78,11 +78,13 @@ function shuffle() {
 
 function generateAlphabet() {
 	lettersTab.forEach(e => {
-		$('.passwordContainer').append('<div class="letter" id="letter' + /*lettersTab.indexOf(*/e//) 
-				+ '" onclick="checkLetter(' + "'" + /*lettersTab.indexOf(*/e/*)*/ + "'" + ')"><span class="innerLetter">' + e + '</span></div>');
-		///add tooltip for vowels
-		if (checkIfVowel(/*lettersTab.indexOf(*/e/*)*/)) {
-			$('#letter' + /*lettersTab.indexOf(*/e/*)*/).addClass('customTooltip');
+		$('.passwordContainer').append('<div class="letter" id="letter' + e	+ '"><span class="innerLetter">' + e + '</span></div>');
+		//$('#letter' + e).on('click', checkLetter(e));
+		
+		$('#letter' + e).on('click', function(){checkLetter(e)});
+		///// add tooltip for vowels
+		if (checkIfVowel(e)) {
+			$('#letter' + e).addClass('customTooltip');
 		}
 	});
 }
@@ -156,23 +158,24 @@ function checkVowelForPlayer(personPlaying) {
  * *********************************** */
 var wheelSpinning = false;
 var isVowel;
-async function checkLetter(letterNumber) {
-	if (!wheelSpinning && (wheelSpinned || correctGuess)) {
+async function checkLetter(letterValue) {
+	if (!wheelSpinning ///// wheel is not spinning
+				&& (wheelSpinned || correctGuess)) {
 		correctGuess = false;
 		/// check if is vowel chosen and player has enough points to reveal it
-		isVowel = checkIfVowel(letterNumber);
+		isVowel = checkIfVowel(letterValue);
 		if (isVowel && !checkVowelForPlayer(personPlaying)) {
 			return;
 		};
 		for (i = 0; i < passwordWithoutSpaces.length; i++) {
 			/// check if guess not correct
-			if (passwordWithoutSpaces.charAt(i).toUpperCase() != $('#letter' + letterNumber).children().text())
+			if (passwordWithoutSpaces.charAt(i).toUpperCase() != $('#letter' + letterValue).children().text())
 				continue;			
 			$('.disabledLetter:eq(' + i + ')')
-					.html('<span class="innerPasswordLetter">' + $('#letter' + letterNumber).text() + '</span>')
+					.html('<span class="innerPasswordLetter">' + $('#letter' + letterValue).text() + '</span>')
 					.addClass('guessedLetter');	
 			blink(i);
-			$('#letter' + letterNumber).css('background-color', 'rgb(163, 231, 147)');
+			$('#letter' + letterValue).addClass('correctLetter');
 			await new Promise(r => setTimeout(r, 500));
 			
 			//$passwordGuessed = $('#passwordGuessed');					
@@ -192,7 +195,7 @@ async function checkLetter(letterNumber) {
 		//	$passwordGuessed.css('visibility', 'unset');
 
 		if (!correctGuess) {
-			$('#letter' + letterNumber).css('background-color', 'rgb(220, 44, 44)');
+			$('#letter' + letterValue).addClass('wrongLetter');
 			$('#passwordGuessed').css('visibility', 'hidden');
 			wrongAudio.play();
 			changePerson();
@@ -448,7 +451,7 @@ function spin($) {
 		setTimeout(function() {wheelSpinned = true; wheelSpinning = false;}, spinningTime);
 	});
 };
-///// allow enter on typing password
+///// allow enter key on typing password
 function allowEnter(){
 	$passwordTyped = $('#password');
 	$passwordTyped.keydown(function(e) {
@@ -456,10 +459,7 @@ function allowEnter(){
 			$('#checkPassword').click();
 	});
 }
-///// allow muting the wheel sound
-/*function putSoundIcon() {
-	$('.container-fluid').prepend('<div id="audioIcon" onclick="muteWheelSound();" style="position: absolute; right: 10px;"><img src="../img/audio.svg" height="20"></div>');
-}*/
+///// allow wheel muting
 function muteWheelSound() {
 	var $img = $('#audioIcon').children('img').attr('src');
 	if ($img.indexOf('/audio') != -1) {
@@ -475,6 +475,5 @@ function muteWheelSound() {
 $(document).on('keypress', function (e) {
 	checkLetter(String.fromCharCode(e.which).toUpperCase());
 });
-
 
 $(document).ready(function() {generatePlayers();getName();generatePasswordDiv(password); generateAlphabet();drawWheel();spin($);allowEnter();});
