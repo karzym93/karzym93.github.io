@@ -50,7 +50,7 @@ function drawWheel() {
 	///draw a circle inside of wheel
 	ctx.beginPath();
 	ctx.arc(0,0, wheelWidth / 5,0,Math.PI*2);
-	ctx.fillStyle='#eae427';
+	ctx.fillStyle='#afa100';
 	ctx.fill();	
 	
 	ctx.globalCompositeOperation='source-atop';
@@ -73,11 +73,11 @@ function drawWheel() {
 	ctx.fill();
 	ctx.textBaseline="middle";
 	ctx.textAlign="center";
-	ctx.fillStyle = "#d64343";
-	ctx.font = Math.floor(wheelWidth / 12) + "px fantasy";
-	ctx.fillText("Wheel",0,-wheelWidth / 10);
+	ctx.fillStyle = "#1f1f1f";
+	ctx.font = "bold " + Math.floor(wheelWidth / 20) + "px Wide Latin";
+	ctx.fillText("Wheel",0,-wheelWidth / 15);
 	ctx.fillText("of",0,0);
-	ctx.fillText("Fortune",0,wheelWidth / 10);
+	ctx.fillText("Fortune",0,wheelWidth / 15);
 	ctx.closePath();
 	ctx.stroke();
   	ctx.restore();
