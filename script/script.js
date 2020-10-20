@@ -225,11 +225,11 @@ function checkPasswordCorrectness() {
 		wrongAudio.play();
 		$('#passwordGuessed').css('visibility', 'hidden');
 		$('#password').val(null);
-		console.log("asdasd");	
 		changePerson();
 		wheelSpinned = false;
 	}
 }
+$(document).on('click', '#checkPassword', function() { checkPasswordCorrectness(); });
 
 var prizes = shuffle();
 
@@ -345,7 +345,9 @@ function allowEnter(){
 
 ///// allow typing letters instead of clicking
 $(document).on('keypress', function (e) {
+	///// check if cursor is in the textfield with password
+	if (e.target.nodeName == 'INPUT') return;
 	checkLetter(String.fromCharCode(e.which).toUpperCase());
 });
 
-$(document).ready(function() {generatePlayers();getName();generatePasswordDiv(password); generateAlphabet();/*drawWheel();*/spin($);allowEnter();});
+$(document).ready(function() {generatePlayers();getName();generatePasswordDiv(password); generateAlphabet();spin($);allowEnter();});
