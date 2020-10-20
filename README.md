@@ -1,7 +1,7 @@
 Wheel of fortune
 ================
 
-Wheel of fortune is a game for 2-4 players based on popular TV show. Passwords to guess can be set by a third person or randomly chosen from library. A real wheel is provided, however the prizes for each letter are not.
+Wheel of fortune is a game for 2-4 players based on popular TV show. Passwords to guess can be set by a third person or randomly chosen from a library containging thousands of them. A real wheel is provided, however the prizes for each letter are not. 
 
 How to play
 -----------
@@ -39,10 +39,10 @@ Or go to [playable demo here](https://karzym93.github.io/start.html).
 
 Features
 --------
-- possibility to play for 2-4 players
+- possibility to play for 2-4 players - no additional player setting password needed
 - library with few thousands of passwords
 - mobile support
-- letters from keyboard
+- a possibility to set letters from keyboard
 
 To do
 -----
