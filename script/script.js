@@ -8,7 +8,6 @@ var wheelParts = 20;
 var prize = 0;
 var correctGuess = false;
 var wrongAudio = new Audio('../sound/wrong.mp3');
-var wheelAudio = new Audio('../sound/wheel3.mp3');
 var spinningTime = 7000; 
 var lettersTab = ["A", "Ą", "B", "C", "Ć", "D", "E", "Ę", "F", "G", "H", "I", "J", "K", "L",
 "Ł", "M", "N", "Ń", "O", "P", "Q", "R", "S", "Ś", "T", "U", "V", "W", "X", "Y", "Z", "Ź", "Ż"]
@@ -17,7 +16,7 @@ var vowelCost = 500;
 function generatePlayers() {
 	$players = $('#players');
 	for (i = numberOfPlayers; i > 0; i--) {
-		$players.prepend('<div class="player col-6 col-md-3" id="player' + i + '"><div class="photo" style=\'background-image: url("../img/player' + i + '.png")\'></div><div class="caption inactive" id="playerName' + i + '">Player ' + i + ': <span>0</span></div></div>');
+		$players.prepend('<div class="player col-6 col-md-' + 12/numberOfPlayers + '" id="player' + i + '"><div class="photo" style=\'background-image: url("../img/player' + i + '.png")\'></div><div class="caption inactive" id="playerName' + i + '">Player ' + i + ': <span>0</span></div></div>');
 	}
 	$('#playerName1')
 			.addClass('active')
@@ -420,17 +419,6 @@ function spin($) {
 			prize = prizes[(partNumber) % wheelParts];
 			console.log("value: " + prizes[(partNumber) % wheelParts]);
 
-			///// play sound while new part of the wheel is achieved, not happy with that solution
-			var playSoundRepeated = setInterval(function(){playSound(2)}, 3);
-			function playSound(angleDiff) {
-				if (getCurrentAngle() % (360 / wheelParts) < angleDiff) {
-					//var wheelAudio = new Audio('../sound/wheel3.mp3');
-					wheelAudio.play();
-				}
-			}
-			setTimeout(function(){
-				clearInterval(playSoundRepeated);
-			}, spinningTime);
 			////change player in bankrupt case
 			//if (prize=='Bankrupt') {
 			setTimeout(function() {
@@ -459,18 +447,7 @@ function allowEnter(){
 			$('#checkPassword').click();
 	});
 }
-///// allow wheel muting
-function muteWheelSound() {
-	var $img = $('#audioIcon').children('img').attr('src');
-	if ($img.indexOf('/audio') != -1) {
-		$('#audioIcon').children('img').attr('src', '../img/no_audio.svg');
-		wheelAudio.muted = true;
-	}
-	else {
-		$('#audioIcon').children('img').attr('src', '../img/audio.svg');
-		wheelAudio.muted = false;
-	}
-}
+
 ///// allow typing letters instead of clicking
 $(document).on('keypress', function (e) {
 	checkLetter(String.fromCharCode(e.which).toUpperCase());
