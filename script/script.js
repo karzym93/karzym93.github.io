@@ -309,7 +309,7 @@ function spin($) {
 			var randomPower = Math.floor(100*Math.random() + 300);
 			angle = angle + Math.abs(curAngle*2) + randomPower;
 			$wheel.css('transform', 'rotate(' + angle + 'deg)')
-			$wheel.css('transition', 'transform ' + spinningTime/1000 + 's');
+			$wheel.css('transition', 'transform ' + spinningTime/1000 + 's cubic-bezier(.41,.76,.7,1)');
 			var partNumber = Math.floor(angle % 360 / (360 / wheelParts));
 			prize = prizes[(partNumber) % wheelParts];
 			console.log("value: " + prizes[(partNumber) % wheelParts]);
