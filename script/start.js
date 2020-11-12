@@ -23,7 +23,7 @@ function checkLength() {
 	if ($('#password').val().length > 0)
 		$('button').text("Let's play!");
 	else
-		$('button').text("...or try to guess random password!");
+		$('button').text("Try to guess random password!");
 }
 
 function setCookie(name, value) {
